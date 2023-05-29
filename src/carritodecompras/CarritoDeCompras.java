@@ -5,10 +5,12 @@
  */
 package carritodecompras;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -19,34 +21,19 @@ import javafx.stage.StageStyle;
 public class CarritoDeCompras extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("VentanaTabla.fxml"));
-        
-        Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
-        root.setOnMousePressed(event -> {
-            // Guardar las coordenadas de la posición actual de la ventana
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-
-        // Agregar un evento onMouseDragged al contenido de la ventana
-        root.setOnMouseDragged(event -> {
-            // Mover la ventana mediante la posición del mouse
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-            
-        });
-        
-        stage.setScene(scene);
-        stage.show();
-    }
-    
+    Stage loginStage = new Stage();
+    loginStage.initStyle(StageStyle.UNDECORATED);
+    loginStage.setResizable(false);
+    loginStage.setTitle("Login");
+    Parent loginRoot = FXMLLoader.load(getClass().getResource("Login.fxml"));
+    Scene loginScene = new Scene(loginRoot);
+    loginStage.setScene(loginScene);
+    loginStage.show();
+}
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-    private double xOffset = 0;
-    private double yOffset = 0;    
 }

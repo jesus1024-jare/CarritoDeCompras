@@ -165,6 +165,13 @@ public class VentanaTablaController implements Initializable {
                     nodos.get(0).setAnt(nuevo);
                 }
                 nodos.add(nuevo);
+                tablaauto.setItems(nodos);
+            tablaauto.refresh();
+            txtmod.setText("");
+            txtmar.setText("");
+            txtmatri.setText("");
+            txtpreci.setText("");
+            txtunid.setText("");
             }
         } else {
             // mostrar mensaje de advertencia sobre campos vacíos
@@ -209,6 +216,13 @@ public class VentanaTablaController implements Initializable {
             alerta.setHeaderText("Mensaje de informacion");
             alerta.setTitle("Dialogo de advertencia");
             alerta.setContentText("Es necesario escribir todos los datos");
+            tablaauto.setItems(nodos);
+            tablaauto.refresh();
+            txtmod.setText("");
+            txtmar.setText("");
+            txtmatri.setText("");
+            txtpreci.setText("");
+            txtunid.setText("");
             alerta.showAndWait();
         }
     }
