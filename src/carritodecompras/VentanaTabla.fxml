@@ -54,7 +54,6 @@
           <Menu mnemonicParsing="false" text="Opciones">
             <items>
                   <MenuItem fx:id="BotonBuscar" mnemonicParsing="false" onAction="#btnbuscar" text="Buscar" />
-                  <MenuItem fx:id="btnComprar" mnemonicParsing="false" onAction="#metodoComprar" text="Comprar" />
             </items>
           </Menu>
         </menus>
