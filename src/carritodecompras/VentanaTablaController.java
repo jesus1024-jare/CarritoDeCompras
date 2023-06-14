@@ -26,6 +26,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -428,11 +429,43 @@ public class VentanaTablaController implements Initializable {
 
     @FXML
     public void Mostrar(ActionEvent event) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Mensaje de Alerta");
-        alert.setHeaderText("Listado    ");
-        alert.setContentText("");
-
+    // Crear una instancia de Alert con tipo INFORMATION
+    Alert alert = new Alert(AlertType.INFORMATION);
+    // Establecer el título de la ventana de alerta
+        alert.setTitle("Listado de autos");
+        // Establecer el encabezado de la ventana de alerta
+        alert.setHeaderText("Listado completo de autos disponibles");
+        // Crear un StringBuilder para construir la cadena de texto
+        StringBuilder stringBuilder = new StringBuilder();
+        // Obtener la lista de autos desde tablaauto
+        ObservableList<nodo> autos = tablaauto.getItems();
+        // Obtener el primer elemento de la lista y asignarlo a nodoActual
+        nodo nodoActual = autos.get(0);
+        // Verificar si la lista no está vacía
+        if (!autos.isEmpty()) {
+            // Recorrer la lista circular de autos
+            do {
+                // Construir la cadena de texto con los atributos del auto y agregarla al StringBuilder
+                stringBuilder.append(nodoActual.getModelo())
+                        .append("   ")
+                        .append(nodoActual.getMarca())
+                        .append("   ")
+                        .append(nodoActual.getMatricula())
+                        .append("   ")
+                        .append(nodoActual.getPrecio())
+                        .append("   ")
+                        .append(nodoActual.getUnidades())
+                        .append("\n");
+                // Avanzar al siguiente nodo en la lista circular
+                nodoActual = nodoActual.getSig();
+            } while (nodoActual != autos.get(0));
+            // Establecer el contenido de la ventana de alerta con la cadena de texto construida    
+            alert.setContentText(stringBuilder.toString());
+        } else {
+            // Si la lista está vacía, establecer un mensaje indicando que no hay autos disponibles
+            alert.setContentText("No hay autos disponibles.");
+        }
+        // Mostrar la ventana de alerta y esperar a que el usuario la cierre
         alert.showAndWait();
     }
 
