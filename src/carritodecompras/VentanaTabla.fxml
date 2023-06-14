@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -53,6 +54,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Opciones">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#Mostrar" text="Mostrar listado" />
+                  <RadioMenuItem fx:id="Muni" mnemonicParsing="false" onAction="#Unidades" text="Cambiar unidades" />
                   <MenuItem fx:id="BotonBuscar" mnemonicParsing="false" onAction="#btnbuscar" text="Buscar" />
             </items>
           </Menu>

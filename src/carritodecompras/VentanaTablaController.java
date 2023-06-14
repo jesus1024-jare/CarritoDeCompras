@@ -24,8 +24,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -50,7 +50,7 @@ public class VentanaTablaController implements Initializable {
     @FXML
     private Button btAgregarAlInicio;
     @FXML
-    private MenuItem btnComprar;
+    private RadioMenuItem Muni;
 
     public VentanaTablaController() {
         cab = null;
@@ -101,7 +101,6 @@ public class VentanaTablaController implements Initializable {
             System.out.println("El archivo no se pudo encontrar.");
         }
 
-        // Set cell value factories and styles
         columnamodelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
         columnamodelo.setStyle("-fx-alignment: CENTER-LEFT");
         columnamarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
@@ -149,7 +148,8 @@ public class VentanaTablaController implements Initializable {
                 txtunid.setText("");
                 alert.showAndWait();
             } else {
-                nodo nuevo = new nodo(txtmod.getText().trim(), txtmar.getText().trim(), matricula, Float.parseFloat(txtpreci.getText().trim()), Integer.parseInt(txtunid.getText().trim()));
+                nodo nuevo = new nodo(txtmod.getText().trim(), txtmar.getText().trim(), matricula, Float.parseFloat(txtpreci.getText().trim()),
+                        Integer.parseInt(txtunid.getText().trim()));
                 Alert alertas = new Alert(AlertType.INFORMATION);
                 alertas.setTitle("Proceso Exitoso");
                 alertas.setContentText("Nodo agregado al final de la lista");
@@ -166,12 +166,12 @@ public class VentanaTablaController implements Initializable {
                 }
                 nodos.add(nuevo);
                 tablaauto.setItems(nodos);
-            tablaauto.refresh();
-            txtmod.setText("");
-            txtmar.setText("");
-            txtmatri.setText("");
-            txtpreci.setText("");
-            txtunid.setText("");
+                tablaauto.refresh();
+                txtmod.setText("");
+                txtmar.setText("");
+                txtmatri.setText("");
+                txtpreci.setText("");
+                txtunid.setText("");
             }
         } else {
             // mostrar mensaje de advertencia sobre campos vacíos
@@ -230,10 +230,6 @@ public class VentanaTablaController implements Initializable {
     @FXML
     private void salir(ActionEvent event) {
         System.exit(0);
-    }
-
-    public void onMenuItemClick() {
-        System.out.println("Se ha hecho clic en el MenuItem." + cab.getMarca());
     }
 
     @FXML
@@ -394,8 +390,8 @@ public class VentanaTablaController implements Initializable {
             tablaauto.layout();
             tablaauto.setItems(FXCollections.observableList(nodos));
             Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setHeaderText("Deseas comprar el auto "+auto.getModelo()+"?");
-            alerta.setContentText("El precio del auto es: "+auto.getPrecio()+"\nEl total a pagar es: "+(auto.getPrecio()*cantidadComprar));
+            alerta.setHeaderText("Deseas comprar el auto " + auto.getModelo() + "?");
+            alerta.setContentText("El precio del auto es: " + auto.getPrecio() + "\nEl total a pagar es: " + (auto.getPrecio() * cantidadComprar));
             Alert notify = new Alert(Alert.AlertType.INFORMATION);
             notify.setTitle("Proceso Exitoso!");
             notify.setHeaderText("Cargando informacion...");
@@ -431,6 +427,63 @@ public class VentanaTablaController implements Initializable {
     }
 
     @FXML
-    private void metodoComprar(ActionEvent event) {
+    public void Mostrar(ActionEvent event) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Mensaje de Alerta");
+        alert.setHeaderText("Listado    ");
+        alert.setContentText("");
+
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void Unidades(ActionEvent event) {
+        TextInputDialog dialogo = new TextInputDialog("");
+        dialogo.setTitle("Buscar automóvil");
+        dialogo.setHeaderText(null);
+        dialogo.setContentText("Ingrese la matrícula:");
+
+        Optional<String> matricula = dialogo.showAndWait();
+        if (matricula.isPresent()) {
+            if (nodos.isEmpty()) {
+                // mostrar mensaje de advertencia si la lista está vacía
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setHeaderText("Lista vacía");
+                alerta.setContentText("No hay automóviles en la lista.");
+                alerta.showAndWait();
+                return;
+            }
+            nodo actual = nodos.get(0);
+            do {
+                if (actual.getMatricula().equals(matricula.get())) {
+                    // Mostrar diálogo para ingresar el número de unidades
+                    TextInputDialog dialogo2 = new TextInputDialog("");
+                    dialogo2.setHeaderText("Automóvil encontrado");
+                    dialogo2.setContentText("Ingrese numero de unidades nueva:");
+
+                    Optional<String> unidades = dialogo2.showAndWait();
+
+                    // Si se ingresó un número de unidades, actualizar el objeto y mostrar mensaje
+                    if (unidades.isPresent()) {
+                        int nuevasUnidades = Integer.parseInt(unidades.get());
+                        actual.setUnidades(nuevasUnidades);
+                        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                        alerta.setHeaderText("Proceso Exitoso!");
+                        alerta.setTitle("Cargando informacion...");
+                        alerta.setContentText("Unidades registradas correctamente");
+                        alerta.showAndWait();
+                        tablaauto.setItems(null);
+                        tablaauto.layout();
+                        tablaauto.setItems(FXCollections.observableList(nodos));
+                    }
+                    return; // salir del método si se encuentra la matrícula
+                }
+                actual = actual.getSig();
+            } while (actual != nodos.get(0)); // seguir mientras no se regrese al primer nodo
+            // mostrar mensaje de advertencia si no se encuentra la matrícula
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setHeaderText("Matrícula no encontrada");
+            alerta.setContentText("No se encontró ningún automóvil con lamatrícula ingresada.");
+        }
     }
 }

@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -57,10 +58,15 @@ public class LoginController implements Initializable {
             // Create a new stage and call the openVentanaTabla method
             Stage stage = new Stage();
             openVentanaTabla(stage, event);
+        }else if ((usuario.getText() == null ? ("Unicord") != null : !usuario.getText().equals("Unicord")) && contra.getText()!=("2023")){
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Datos Erroneos");
+            alerta.setHeaderText("Vuelva a ingresar los datos");
+            alerta.setContentText("Los datos ingresados no son validos");
+            alerta.showAndWait();
         }
     }
 
-    @FXML
     public void openVentanaTabla(Stage stage, ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaTabla.fxml"));
@@ -85,7 +91,6 @@ public class LoginController implements Initializable {
         scene.setOnMousePressed(mousePressed);
         scene.setOnMouseDragged(mouseDragged);
 
-        // Show the stage
         stage.show();
     }
     private double xOffset;
