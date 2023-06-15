@@ -52,6 +52,8 @@ public class VentanaTablaController implements Initializable {
     private Button btAgregarAlInicio;
     @FXML
     private RadioMenuItem Muni;
+    @FXML
+    private Button btnMaximizar;
 
     public VentanaTablaController() {
         cab = null;
@@ -87,7 +89,6 @@ public class VentanaTablaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         File file = new File("C:/Prueba/prueba.txt");
 
         try {
@@ -429,9 +430,9 @@ public class VentanaTablaController implements Initializable {
 
     @FXML
     public void Mostrar(ActionEvent event) {
-    // Crear una instancia de Alert con tipo INFORMATION
-    Alert alert = new Alert(AlertType.INFORMATION);
-    // Establecer el título de la ventana de alerta
+        // Crear una instancia de Alert con tipo INFORMATION
+        Alert alert = new Alert(AlertType.INFORMATION);
+        // Establecer el título de la ventana de alerta
         alert.setTitle("Listado de autos");
         // Establecer el encabezado de la ventana de alerta
         alert.setHeaderText("Listado completo de autos disponibles");
@@ -467,6 +468,7 @@ public class VentanaTablaController implements Initializable {
         }
         // Mostrar la ventana de alerta y esperar a que el usuario la cierre
         alert.showAndWait();
+        //3123033608
     }
 
     @FXML
@@ -518,5 +520,11 @@ public class VentanaTablaController implements Initializable {
             alerta.setHeaderText("Matrícula no encontrada");
             alerta.setContentText("No se encontró ningún automóvil con lamatrícula ingresada.");
         }
+    }
+
+    @FXML
+    private void maximizeWindow(ActionEvent event) {
+        Stage stage = (Stage) btnMaximizar.getScene().getWindow();
+        stage.setMaximized(true);
     }
 }
