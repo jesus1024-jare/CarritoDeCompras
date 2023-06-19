@@ -16,7 +16,7 @@
         <URL value="@login.css" />
     </stylesheets>
    <children>
-      <Pane prefHeight="402.0" prefWidth="379.0" style="-fx-background-color: EAEAEA;">
+      <Pane prefHeight="402.0" prefWidth="379.0" style="-fx-background-color: E8EBF0;">
          <children>
             <Label layoutX="60.0" layoutY="187.0" prefHeight="40.0" prefWidth="57.0" text="User">
                <font>
@@ -34,10 +34,10 @@
                </image>
             </ImageView>
             <Separator layoutY="160.0" prefHeight="4.0" prefWidth="379.0" />
-            <Button fx:id="loginn" layoutX="101.0" layoutY="308.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="82.0" style="-fx-background-color: FF4D6D;" text="Login" />
-            <Button fx:id="btsal" layoutX="199.0" layoutY="308.0" mnemonicParsing="false" onAction="#salir" prefHeight="40.0" prefWidth="82.0" style="-fx-background-color: D9D9D9;" text="Exit" />
-            <TextField fx:id="usuario" layoutX="142.0" layoutY="195.0" />
-            <TextField fx:id="contra" layoutX="144.0" layoutY="242.0" />
+            <Button fx:id="loginn" layoutX="101.0" layoutY="308.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="82.0" style="-fx-background-color: #31456f;" text="Login" />
+            <Button fx:id="btsal" layoutX="199.0" layoutY="308.0" mnemonicParsing="false" onAction="#salir" prefHeight="40.0" prefWidth="82.0" style="-fx-background-color: #EE0E0E;" text="Exit" />
+            <TextField fx:id="usuario" layoutX="142.0" layoutY="195.0" style="-fx-background-color: FFFFFF;" />
+            <TextField fx:id="contra" layoutX="144.0" layoutY="242.0" style="-fx-background-color: FFFFFF;" />
          </children>
       </Pane>
    </children>

@@ -15,38 +15,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: E9ECEF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carritodecompras.VentanaTablaController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: E9ECEF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carritodecompras.VentanaTablaController">
    <children>
-      <TableView fx:id="tablaauto" layoutX="21.0" layoutY="461.0" prefHeight="636.0" prefWidth="1326.0">
+      <TableView fx:id="tablaauto" layoutX="23.0" layoutY="301.0" prefHeight="477.0" prefWidth="905.0">
         <columns>
-          <TableColumn fx:id="columnamodelo" prefWidth="228.99996948242188" style="-fx-background-color: #31456f;" text="Modelo" />
-          <TableColumn fx:id="columnamarca" prefWidth="268.99998474121094" style="-fx-background-color: #31456f;" text="Marca" />
-            <TableColumn fx:id="columnamatricula" prefWidth="265.0" style="-fx-background-color: #31456f;" text="Matricula" />
-            <TableColumn fx:id="columnaprecio" prefWidth="278.0" style="-fx-background-color: #31456f;" text="Precio" />
-            <TableColumn fx:id="columnaunidades" prefWidth="285.0" style="-fx-background-color: #31456f;" text="Unidades" />
+          <TableColumn fx:id="columnamodelo" prefWidth="152.0" style="-fx-background-color: #31456f;" text="Modelo" />
+          <TableColumn fx:id="columnamarca" prefWidth="166.00003051757812" style="-fx-background-color: #31456f;" text="Marca" />
+            <TableColumn fx:id="columnamatricula" prefWidth="210.0" style="-fx-background-color: #31456f;" text="Matricula" />
+            <TableColumn fx:id="columnaprecio" prefWidth="184.0" style="-fx-background-color: #31456f;" text="Precio" />
+            <TableColumn fx:id="columnaunidades" prefWidth="191.0" style="-fx-background-color: #31456f;" text="Unidades" />
         </columns>
       </TableView>
-      <Pane layoutX="1347.0" prefHeight="1133.0" prefWidth="573.0" style="-fx-background-color: E9ECEF;">
+      <Pane layoutX="944.0" layoutY="7.0" prefHeight="793.0" prefWidth="357.0" style="-fx-background-color: E9ECEF;">
          <children>
-            <Button fx:id="btAgregarAlInicio" layoutX="119.0" layoutY="837.0" mnemonicParsing="false" onAction="#btnagregaralinicio" onMouseExited="#mouseSale" onMouseMoved="#mouseEntra" prefHeight="66.0" prefWidth="335.0" style="-fx-background-color: #31456f;" text="Añadir Al Inicio" textFill="WHITE" />
-            <Button fx:id="btelimi" layoutX="119.0" layoutY="748.0" mnemonicParsing="false" onAction="#compra" onMouseExited="#mouseSalida" onMouseMoved="#mouseEntrar" prefHeight="66.0" prefWidth="335.0" style="-fx-background-color: #31456f;" text="Comprar" textFill="WHITE" />
-            <Button fx:id="btnSalida" layoutX="526.0" layoutY="7.0" mnemonicParsing="false" onAction="#salir" onMouseExited="#mouseS" onMouseMoved="#mouseE" prefHeight="27.0" prefWidth="41.0" style="-fx-background-color: FF4D6D;" text="X">
+            <Button fx:id="btAgregarAlInicio" layoutX="23.0" layoutY="599.0" mnemonicParsing="false" onAction="#btnagregaralinicio" onMouseExited="#mouseSale" onMouseMoved="#mouseEntra" prefHeight="53.0" prefWidth="305.0" style="-fx-background-color: #31456f;" text="Añadir Al Inicio" textFill="WHITE" />
+            <Button fx:id="btelimi" layoutX="23.0" layoutY="531.0" mnemonicParsing="false" onAction="#compra" onMouseExited="#mouseSalida" onMouseMoved="#mouseEntrar" prefHeight="53.0" prefWidth="305.0" style="-fx-background-color: #31456f;" text="Comprar" textFill="WHITE" />
+            <Button fx:id="btnSalida" layoutX="309.0" layoutY="2.0" mnemonicParsing="false" onAction="#salir" onMouseExited="#mouseS" onMouseMoved="#mouseE" prefHeight="27.0" prefWidth="41.0" style="-fx-background-color: #EE0E0E;" text="X">
                <font>
                   <Font name="SansSerif Regular" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btminimizar" layoutX="447.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="30.0" prefWidth="41.0" style="-fx-background-color: e9ecef;" text="-">
+            <Button fx:id="btminimizar" layoutX="268.0" mnemonicParsing="false" onMouseClicked="#minimizeWindow" prefHeight="30.0" prefWidth="41.0" style="-fx-background-color: e9ecef;" text="-">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="466.0" fitWidth="466.0" layoutX="61.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="323.0" fitWidth="376.0" layoutX="14.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pngegg.png" />
                </image>
             </ImageView>
-            <Button fx:id="btaña" layoutX="119.0" layoutY="659.0" mnemonicParsing="false" onAction="#btnagregar" onMouseExited="#mouseExited" onMouseMoved="#mouseEntered" prefHeight="66.0" prefWidth="335.0" style="-fx-background-color: #31456f;" text="Añadir" textFill="WHITE" />
-            <Button fx:id="btnMaximizar" layoutX="488.0" layoutY="5.0" mnemonicParsing="false" onAction="#maximizeWindow" prefHeight="31.0" prefWidth="41.0" style="-fx-background-color: e9ecef;" text="=" />
+            <Button fx:id="btaña" layoutX="23.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnagregar" onMouseExited="#mouseExited" onMouseMoved="#mouseEntered" prefHeight="53.0" prefWidth="305.0" style="-fx-background-color: #31456f;" text="Añadir" textFill="WHITE" />
          </children>
       </Pane>
       <MenuBar prefHeight="31.0" prefWidth="258.0" style="-fx-background-color: E9ECEF;">
@@ -60,20 +59,20 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label layoutX="779.0" layoutY="19.0" text="MOST WANTED CAR DEALER" textFill="#31456f">
+      <Label layoutX="514.0" layoutY="18.0" text="MOST WANTED CAR DEALER" textFill="#31456f">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txtmod" layoutX="70.0" layoutY="187.0" prefHeight="37.0" prefWidth="356.0" style="-fx-background-color: FFFFFF;" />
-      <Label layoutX="71.0" layoutY="148.0" prefHeight="21.0" prefWidth="95.0" text="Modelo" />
-      <TextField fx:id="txtmar" layoutX="70.0" layoutY="314.0" prefHeight="37.0" prefWidth="356.0" style="-fx-background-color: FFFFFF;" />
-      <Label layoutX="71.0" layoutY="281.0" prefHeight="21.0" prefWidth="95.0" text="Marca" />
-      <TextField fx:id="txtmatri" layoutX="955.0" layoutY="316.0" prefHeight="37.0" prefWidth="356.0" style="-fx-background-color: FFFFFF;" />
-      <Label layoutX="513.0" layoutY="151.0" prefHeight="21.0" prefWidth="95.0" text="Matricula" />
-      <TextField fx:id="txtpreci" layoutX="513.0" layoutY="316.0" prefHeight="37.0" prefWidth="356.0" style="-fx-background-color: FFFFFF;" />
-      <Label layoutX="513.0" layoutY="284.0" prefHeight="21.0" prefWidth="95.0" text="Precio (US)" />
-      <TextField fx:id="txtunid" layoutX="513.0" layoutY="187.0" prefHeight="37.0" prefWidth="356.0" style="-fx-background-color: FFFFFF;" />
-      <Label layoutX="955.0" layoutY="281.0" prefHeight="21.0" prefWidth="95.0" text="Unidades" />
+      <TextField fx:id="txtmod" layoutX="22.0" layoutY="104.0" prefHeight="37.0" prefWidth="250.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="23.0" layoutY="65.0" prefHeight="21.0" prefWidth="95.0" text="Modelo" />
+      <TextField fx:id="txtmar" layoutX="19.0" layoutY="190.0" prefHeight="37.0" prefWidth="250.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="20.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Marca" />
+      <TextField fx:id="txtmatri" layoutX="589.0" layoutY="189.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="299.0" layoutY="65.0" prefHeight="21.0" prefWidth="95.0" text="Matricula" />
+      <TextField fx:id="txtpreci" layoutX="299.0" layoutY="190.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="299.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Precio (US)" />
+      <TextField fx:id="txtunid" layoutX="299.0" layoutY="104.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="589.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Unidades" />
    </children>
 </AnchorPane>

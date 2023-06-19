@@ -19,17 +19,34 @@ import javafx.stage.StageStyle;
  * @author jesus
  */
 public class CarritoDeCompras extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
-    Stage loginStage = new Stage();
-    loginStage.initStyle(StageStyle.UNDECORATED);
-    loginStage.setResizable(false);
-    loginStage.setTitle("Login");
-    Parent loginRoot = FXMLLoader.load(getClass().getResource("Login.fxml"));
-    Scene loginScene = new Scene(loginRoot);
-    loginStage.setScene(loginScene);
-    loginStage.show();
-}
+        // Crear una nueva ventana de inicio de sesión
+        Stage loginStage = new Stage();
+
+        // Establecer el estilo de la ventana de inicio de sesión como "sin decoración"
+        loginStage.initStyle(StageStyle.UNDECORATED);
+
+        // Establecer la ventana de inicio de sesión como no redimensionable
+        loginStage.setResizable(false);
+
+        // Establecer el título de la ventana de inicio de sesión
+        loginStage.setTitle("Login");
+
+        // Cargar el archivo Login.fxml
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
+        // Crear una nueva escena para la raíz de inicio de sesión
+        Scene loginScene = new Scene(loginRoot);
+
+        // Establecer la escena de inicio de sesión como la escena de la ventana de inicio de sesión
+        loginStage.setScene(loginScene);
+
+        // Mostrar la ventana de inicio de sesión
+        loginStage.show();
+    }
+
     /**
      * @param args the command line arguments
      */
