@@ -144,9 +144,11 @@ public class VentanaTablaController implements Initializable {
 
     @FXML
     private void btnagregar(ActionEvent event) {
+        // Verificar si el campo de texto "txtmod" no está vacío
         if (!"".equals(txtmod.getText().trim())) {
             String matricula = txtmatri.getText().trim();
             boolean duplicada = false;
+            // Comprobar si la matrícula ya existe en la lista
             for (nodo temp : nodos) {
                 if (temp.getMatricula().equals(matricula)) {
                     duplicada = true;
@@ -158,6 +160,7 @@ public class VentanaTablaController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Matrícula duplicada");
                 alert.setContentText("La matrícula ya existe en la lista.");
+                // Limpiar campos de texto
                 txtmod.setText("");
                 txtmar.setText("");
                 txtmatri.setText("");
@@ -165,22 +168,29 @@ public class VentanaTablaController implements Initializable {
                 txtunid.setText("");
                 alert.showAndWait();
             } else {
+                // Crear un nuevo nodo con los datos ingresados en los campos de texto
                 nodo nuevo = new nodo(txtmod.getText().trim(), txtmar.getText().trim(), matricula, Float.parseFloat(txtpreci.getText().trim()), Integer.parseInt(txtunid.getText().trim()));
+                // Mostrar mensaje de proceso exitoso
                 Alert alertas = new Alert(AlertType.INFORMATION);
                 alertas.setTitle("Proceso Exitoso");
                 alertas.setContentText("Nodo agregado al final de la lista");
                 alertas.showAndWait();
                 if (nodos.isEmpty()) {
+                    // Si la lista está vacía, hacer que el nuevo nodo sea su propio nodo anterior y siguiente
                     nuevo.setAnt(nuevo);
                     nuevo.setSig(nuevo);
                 } else {
+                    // Obtener el último nodo de la lista existente
                     nodo ultimo = nodos.get(nodos.size() - 1);
+                    // Establecer las referencias del nuevo nodo y el último nodo
                     nuevo.setAnt(ultimo);
                     nuevo.setSig(nodos.get(0));
                     ultimo.setSig(nuevo);
                     nodos.get(0).setAnt(nuevo);
                 }
+                // Agregar el nuevo nodo a la lista
                 nodos.add(nuevo);
+                 // Actualizar la tabla y limpiar los campos de texto
                 tablaauto.setItems(nodos);
                 tablaauto.refresh();
                 txtmod.setText("");
@@ -195,6 +205,7 @@ public class VentanaTablaController implements Initializable {
             alerta.setHeaderText("Mensaje de informacion");
             alerta.setTitle("Dialogo de advertencia");
             alerta.setContentText("Es necesario escribir todos los datos");
+            // Limpiar campos de texto
             txtmod.setText("");
             txtmar.setText("");
             txtmatri.setText("");
@@ -206,20 +217,27 @@ public class VentanaTablaController implements Initializable {
 
     @FXML
     private void btnagregaralinicio(ActionEvent event) {
+        // Verificar si el campo de texto "txtmod" no está vacío
         if (!"".equals(txtmod.getText().trim())) {
+            // Crear un nuevo nodo con los datos ingresados en los campos de texto
             nodo nuevo = new nodo(txtmod.getText().trim(), txtmar.getText().trim(), txtmatri.getText().trim(),
                     Float.parseFloat(txtpreci.getText().trim()), Integer.parseInt(txtunid.getText().trim()));
+            // Mostrar mensaje de proceso exitoso
             Alert alertas = new Alert(AlertType.INFORMATION);
             alertas.setTitle("Proceso Exitoso");
             alertas.setContentText("Nodo agregado al inicio de la lista");
             alertas.showAndWait();
             if (nodos.isEmpty()) {
+                // Si la lista está vacía, hacer que el nuevo nodo apunte a sí mismo
                 nuevo.setSig(nuevo); // El único nodo apunta a sí mismo
             } else {
+                // Establecer las referencias del nuevo nodo y el primer nodo actual
                 nuevo.setSig(nodos.get(0)); // El nuevo nodo apunta al primer nodo actual
                 nodos.get(nodos.size() - 1).setSig(nuevo); // El último nodo actual apunta al nuevo nodo
             }
+            // Agregar el nuevo nodo al inicio de la lista
             nodos.add(0, nuevo);
+             // Actualizar la tabla y limpiar los campos de texto
             tablaauto.setItems(nodos);
             tablaauto.refresh();
             txtmod.setText("");
@@ -228,10 +246,12 @@ public class VentanaTablaController implements Initializable {
             txtpreci.setText("");
             txtunid.setText("");
         } else {
+            // Mostrar mensaje de advertencia sobre campos vacíos
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
             alerta.setHeaderText("Mensaje de informacion");
             alerta.setTitle("Dialogo de advertencia");
             alerta.setContentText("Es necesario escribir todos los datos");
+            // Actualizar la tabla y limpiar los campos de texto
             tablaauto.setItems(nodos);
             tablaauto.refresh();
             txtmod.setText("");
