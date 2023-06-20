@@ -68,11 +68,11 @@
       <Label layoutX="23.0" layoutY="65.0" prefHeight="21.0" prefWidth="95.0" text="Modelo" />
       <TextField fx:id="txtmar" layoutX="19.0" layoutY="190.0" prefHeight="37.0" prefWidth="250.0" style="-fx-background-color: FFFFFF;" />
       <Label layoutX="20.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Marca" />
-      <TextField fx:id="txtmatri" layoutX="589.0" layoutY="189.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
+      <TextField fx:id="txtmatri" layoutX="299.0" layoutY="104.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
       <Label layoutX="299.0" layoutY="65.0" prefHeight="21.0" prefWidth="95.0" text="Matricula" />
       <TextField fx:id="txtpreci" layoutX="299.0" layoutY="190.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
       <Label layoutX="299.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Precio (US)" />
-      <TextField fx:id="txtunid" layoutX="299.0" layoutY="104.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
+      <TextField fx:id="txtunid" layoutX="589.0" layoutY="190.0" prefHeight="37.0" prefWidth="258.0" style="-fx-background-color: FFFFFF;" />
       <Label layoutX="589.0" layoutY="157.0" prefHeight="21.0" prefWidth="95.0" text="Unidades" />
    </children>
 </AnchorPane>

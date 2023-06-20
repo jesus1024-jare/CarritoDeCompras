@@ -1,0 +1,12 @@
+BMW M3,BMW,MW123,70000,10
+Lamborghini Gallardo,Lamborghini,MW456,68000,12
+Mercedes-Benz SLR McLaren,Mercedes,MW789,65000,10
+Porsche Carrera GT,Porsche,MW234,67000,8
+Ford GT,Ford,MW567,70000,9
+Chevrolet Corvette C6.R,Chevrolet,MW890,65000,8
+Audi R8,Audi,MW321,60000,7
+Mazda RX-8,Mazda,MW654,60000,11
+Dodge Charger,Dodge,MW987,57000,14
+BMW M6,BMW,MW432,65000,12
+McLaren P1,Mercedes,MW765,60000,13
+Bugatti Veyron,Bugatti,MW098,67000,15
