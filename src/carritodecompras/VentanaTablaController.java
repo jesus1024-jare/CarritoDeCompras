@@ -26,7 +26,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -95,7 +94,7 @@ public class VentanaTablaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Se crea un objeto File con la ruta del archivo "C:/Prueba/prueba.txt"
-        File file = new File("C:/Prueba/prueba.txt");
+        File file = new File("src/Archivo/prueba.txt");
 
         try {
             // Se crea un objeto Scanner para leer el contenido del archivo
