@@ -46,6 +46,7 @@
                </image>
             </ImageView>
             <Button fx:id="btaña" layoutX="23.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnagregar" onMouseExited="#mouseExited" onMouseMoved="#mouseEntered" prefHeight="53.0" prefWidth="305.0" style="-fx-background-color: #31456f;" text="Añadir" textFill="WHITE" />
+            <Button fx:id="btnimagen" layoutX="23.0" layoutY="671.0" mnemonicParsing="false" onAction="#Img" prefHeight="53.0" prefWidth="305.0" style="-fx-background-color: #31456f;" text="Ver Auto" textFill="WHITE" />
          </children>
       </Pane>
       <MenuBar prefHeight="31.0" prefWidth="258.0" style="-fx-background-color: E9ECEF;">

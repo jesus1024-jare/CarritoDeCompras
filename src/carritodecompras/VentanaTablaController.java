@@ -24,10 +24,14 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -52,6 +56,8 @@ public class VentanaTablaController implements Initializable {
     @FXML
     private RadioMenuItem Muni;
     private Button btnMaximizar;
+    @FXML
+    private Button btnimagen;
 
     public VentanaTablaController() {
         cab = null;
@@ -189,7 +195,7 @@ public class VentanaTablaController implements Initializable {
                 }
                 // Agregar el nuevo nodo a la lista
                 nodos.add(nuevo);
-                 // Actualizar la tabla y limpiar los campos de texto
+                // Actualizar la tabla y limpiar los campos de texto
                 tablaauto.setItems(nodos);
                 tablaauto.refresh();
                 txtmod.setText("");
@@ -236,7 +242,7 @@ public class VentanaTablaController implements Initializable {
             }
             // Agregar el nuevo nodo al inicio de la lista
             nodos.add(0, nuevo);
-             // Actualizar la tabla y limpiar los campos de texto
+            // Actualizar la tabla y limpiar los campos de texto
             tablaauto.setItems(nodos);
             tablaauto.refresh();
             txtmod.setText("");
@@ -585,4 +591,71 @@ public class VentanaTablaController implements Initializable {
         }
     }
 
+    @FXML
+    private void Img(ActionEvent event) {
+        // Obtener el automóvil seleccionado en la tabla
+    nodo auto = tablaauto.getSelectionModel().getSelectedItem();
+    // Verificar que se ha seleccionado un automóvil
+    if (auto == null) {
+        // Mostrar mensaje de advertencia si no se ha seleccionado ningún automóvil
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setHeaderText("No se ha seleccionado ningún automóvil");
+        alerta.setContentText("Seleccione un automóvil de la tabla para comprar.");
+        alerta.showAndWait();
+        return;
+    }
+
+    // Obtener la ubicación de la imagen según el modelo del automóvil
+    String imagenPath = null;
+    if (auto.getModelo().equals("BMW M3")) {
+        imagenPath = "src/Imagenes/BMW M3.jpg";
+    } else if (auto.getModelo().equals("Lamborghini Gallardo")) {
+        imagenPath = "src/Imagenes/Lamborghini Gallardo.jpg";
+    } else if (auto.getModelo().equals("Mercedes-Benz SLR McLaren")) {
+        imagenPath = "src/Imagenes/Mercedes-Benz SLR McLaren.jpg";
+    } else if (auto.getModelo().equals("Porsche Carrera GT")) {
+        imagenPath = "src/Imagenes/Porsche Carrera GT.jpg";
+    } else if (auto.getModelo().equals("Ford GT")) {
+        imagenPath = "src/Imagenes/Ford GT.jpg";
+    } else if (auto.getModelo().equals("Chevrolet Corvette C6.R")) {
+        imagenPath = "src/Imagenes/Chevrolet Corvette C6.R.jpg";
+    } else if (auto.getModelo().equals("Audi R8")) {
+        imagenPath = "src/Imagenes/Audi R8.jpg";
+    } else if (auto.getModelo().equals("Mazda RX-8")) {
+        imagenPath = "src/Imagenes/Mazda RX-8.jpg";
+    } else if (auto.getModelo().equals("Dodge Charger")) {
+        imagenPath = "src/Imagenes/Dodge Charger.jpg";
+    } else if (auto.getModelo().equals("BMW M6")) {
+        imagenPath = "src/Imagenes/BMW M6.jpg";
+    } else if (auto.getModelo().equals("McLaren P1")) {
+        imagenPath = "src/Imagenes/McLaren P1.jpg";
+    } else if (auto.getModelo().equals("Bugatti Veyron")) {
+        imagenPath = "src/Imagenes/Bugatti Veyron.jpg";
+    }
+
+    // Verificar si se encontró la ubicación de la imagen
+    if (imagenPath == null) {
+        // Mostrar mensaje de advertencia si no se encontró la ubicación de la imagen
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setHeaderText("No se encontró la imagen para el modelo seleccionado");
+        alerta.setContentText("No se pudo encontrar la imagen para el modelo: " + auto.getModelo());
+        alerta.showAndWait();
+        return;
+    }
+
+    // Cargar la imagen
+    Image imagen = new Image(new File(imagenPath).toURI().toString());
+
+    // Crear un ImageView para mostrar la imagen
+    ImageView imageView = new ImageView(imagen);
+    imageView.setFitWidth(800); // Ajusta el ancho de la imagen según tus necesidades
+    imageView.setPreserveRatio(true);
+    // Crear un diálogo para mostrar la imagen
+Dialog<Image> dialogo = new Dialog<>();
+dialogo.getDialogPane().setContent(imageView);
+dialogo.getDialogPane().getButtonTypes().add(ButtonType.OK);
+dialogo.setTitle("Imagen");
+dialogo.setHeaderText("Esta es la imagen que seleccionaste:");
+dialogo.showAndWait();
+}
 }
