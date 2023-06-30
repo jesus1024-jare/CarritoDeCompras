@@ -728,23 +728,23 @@ public class VentanaTablaController implements Initializable {
             alerta.showAndWait();
         }
     }
-    @FXML
-public void pop() {
-    // Verificar si la pila no está vacía
-    if (!nodos.isEmpty()) {
-        // Eliminar el último elemento de la pila
-        nodos.remove(nodos.size() - 1);
-        
-        // Verificar si la pila aún no está vacía después de eliminar el elemento
-        if (!nodos.isEmpty()) {
-            // Establecer el nodo siguiente (sig) del nuevo último elemento en la pila como null
-            nodos.get(nodos.size()-1).sig = null;
-        }
-        
-        // Actualizar la tabla
-        tablaauto.refresh();
-    }
-}
 
+    @FXML
+    public void pop() {
+        // Verificar si la pila no está vacía
+        if (!nodos.isEmpty()) {
+            // Eliminar el último elemento de la pila
+            nodos.remove(nodos.size() - 1);
+
+            // Verificar si la pila aún no está vacía después de eliminar el elemento
+            if (!nodos.isEmpty()) {
+                // Establecer el nodo siguiente (sig) del nuevo último elemento en la pila como null
+                nodos.get(nodos.size() - 1).sig = null;
+            }
+
+            // Actualizar la tabla
+            tablaauto.refresh();
+        }
+    }
 
 }
