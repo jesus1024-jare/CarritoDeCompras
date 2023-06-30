@@ -612,13 +612,13 @@ public class VentanaTablaController implements Initializable {
         if (auto.getModelo().equals("BMW M3")) {
             imagenPath = "src/Imagenes/BMW M3.jpg";
         } else if (auto.getModelo().equals("Lamborghini Gallardo")) {
-            imagenPath = "src/Imagenes/Lamborghini Gallardo.jpg";
+            imagenPath = "src/Imagenes/gallardo.jpg";
         } else if (auto.getModelo().equals("Mercedes-Benz SLR McLaren")) {
             imagenPath = "src/Imagenes/Mercedes-Benz SLR McLaren.jpg";
         } else if (auto.getModelo().equals("Porsche Carrera GT")) {
             imagenPath = "src/Imagenes/Porsche Carrera GT.jpg";
         } else if (auto.getModelo().equals("Ford GT")) {
-            imagenPath = "src/Imagenes/Ford GT.jpg";
+            imagenPath = "src/Imagenes/ford.jpg";
         } else if (auto.getModelo().equals("Chevrolet Corvette C6.R")) {
             imagenPath = "src/Imagenes/Chevrolet Corvette C6.R.jpg";
         } else if (auto.getModelo().equals("Audi R8")) {
