@@ -730,6 +730,13 @@ public class VentanaTablaController implements Initializable {
     }
     @FXML
     public void pop() {
+    if (!nodos.isEmpty()) {
+        nodos.remove(nodos.size() - 1);
+        if (!nodos.isEmpty()) {
+            nodos.get(nodos.size()-1).sig = null;
+        }
+        tablaauto.refresh();
+    }
 }
 
 
