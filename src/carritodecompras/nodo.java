@@ -10,12 +10,13 @@ package carritodecompras;
  * @author jesus
  */
 public class nodo {
-    
+
     private String modelo, marca, matricula;
     private float precio;
     private int unidades;
-    
+
     nodo sig, ant;
+
     public nodo(String modelo, String marca, String matricula, float precio, int unidades) {
         this.modelo = modelo;
         this.marca = marca;
@@ -81,5 +82,4 @@ public class nodo {
     public void setSig(nodo sig) {
         this.sig = sig;
     }
-
 }

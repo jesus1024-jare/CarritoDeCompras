@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.Stack;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,6 +59,10 @@ public class VentanaTablaController implements Initializable {
     private Button btnMaximizar;
     @FXML
     private Button btnimagen;
+    @FXML
+    private Button btnAgregar;
+    @FXML
+    private Button BtEliminar;
 
     public VentanaTablaController() {
         cab = null;
@@ -84,7 +89,6 @@ public class VentanaTablaController implements Initializable {
     private TextField txtpreci;
     @FXML
     private TextField txtunid;
-    @FXML
     private Button btaña;
     @FXML
     private Button btelimi;
@@ -93,6 +97,7 @@ public class VentanaTablaController implements Initializable {
     // La lista observable permite realizar un seguimiento automático de los cambios en la lista
     // y notificar a los componentes gráficos que dependen de ella sobre dichos cambios.
     private ObservableList<nodo> nodos = FXCollections.observableArrayList();
+    private Stack<String> pila = new Stack<>();
 
     //ArrayList es una implementación básica de una lista dinámica, 
     //ObservableArrayList es una implementación específica de JavaFX que agrega la funcionalidad de notificación de 
@@ -147,7 +152,6 @@ public class VentanaTablaController implements Initializable {
 
     }
 
-    @FXML
     private void btnagregar(ActionEvent event) {
         // Verificar si el campo de texto "txtmod" no está vacío
         if (!"".equals(txtmod.getText().trim())) {
@@ -273,7 +277,6 @@ public class VentanaTablaController implements Initializable {
         System.exit(0);
     }
 
-    @FXML
     private void mouseExited(javafx.scene.input.MouseEvent event) {
         Scene scene = btaña.getScene();
         if (scene != null) {
@@ -297,7 +300,6 @@ public class VentanaTablaController implements Initializable {
         }
     }
 
-    @FXML
     private void mouseEntered(javafx.scene.input.MouseEvent event) {
         Scene scene = btaña.getScene();
         if (scene != null) {
@@ -594,68 +596,141 @@ public class VentanaTablaController implements Initializable {
     @FXML
     private void Img(ActionEvent event) {
         // Obtener el automóvil seleccionado en la tabla
-    nodo auto = tablaauto.getSelectionModel().getSelectedItem();
-    // Verificar que se ha seleccionado un automóvil
-    if (auto == null) {
-        // Mostrar mensaje de advertencia si no se ha seleccionado ningún automóvil
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setHeaderText("No se ha seleccionado ningún automóvil");
-        alerta.setContentText("Seleccione un automóvil de la tabla para comprar.");
-        alerta.showAndWait();
-        return;
+        nodo auto = tablaauto.getSelectionModel().getSelectedItem();
+        // Verificar que se ha seleccionado un automóvil
+        if (auto == null) {
+            // Mostrar mensaje de advertencia si no se ha seleccionado ningún automóvil
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setHeaderText("No se ha seleccionado ningún automóvil");
+            alerta.setContentText("Seleccione un automóvil de la tabla para comprar.");
+            alerta.showAndWait();
+            return;
+        }
+
+        // Obtener la ubicación de la imagen según el modelo del automóvil
+        String imagenPath = null;
+        if (auto.getModelo().equals("BMW M3")) {
+            imagenPath = "src/Imagenes/BMW M3.jpg";
+        } else if (auto.getModelo().equals("Lamborghini Gallardo")) {
+            imagenPath = "src/Imagenes/Lamborghini Gallardo.jpg";
+        } else if (auto.getModelo().equals("Mercedes-Benz SLR McLaren")) {
+            imagenPath = "src/Imagenes/Mercedes-Benz SLR McLaren.jpg";
+        } else if (auto.getModelo().equals("Porsche Carrera GT")) {
+            imagenPath = "src/Imagenes/Porsche Carrera GT.jpg";
+        } else if (auto.getModelo().equals("Ford GT")) {
+            imagenPath = "src/Imagenes/Ford GT.jpg";
+        } else if (auto.getModelo().equals("Chevrolet Corvette C6.R")) {
+            imagenPath = "src/Imagenes/Chevrolet Corvette C6.R.jpg";
+        } else if (auto.getModelo().equals("Audi R8")) {
+            imagenPath = "src/Imagenes/Audi R8.jpg";
+        } else if (auto.getModelo().equals("Mazda RX-8")) {
+            imagenPath = "src/Imagenes/Mazda RX-8.jpg";
+        } else if (auto.getModelo().equals("Dodge Charger")) {
+            imagenPath = "src/Imagenes/Dodge Charger.jpg";
+        } else if (auto.getModelo().equals("BMW M6")) {
+            imagenPath = "src/Imagenes/BMW M6.jpg";
+        } else if (auto.getModelo().equals("McLaren P1")) {
+            imagenPath = "src/Imagenes/McLaren P1.jpg";
+        } else if (auto.getModelo().equals("Bugatti Veyron")) {
+            imagenPath = "src/Imagenes/Bugatti Veyron.jpg";
+        }
+
+        // Verificar si se encontró la ubicación de la imagen
+        if (imagenPath == null) {
+            // Mostrar mensaje de advertencia si no se encontró la ubicación de la imagen
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setHeaderText("No se encontró la imagen para el modelo seleccionado");
+            alerta.setContentText("No se pudo encontrar la imagen para el modelo: " + auto.getModelo());
+            alerta.showAndWait();
+            return;
+        }
+
+        // Cargar la imagen
+        Image imagen = new Image(new File(imagenPath).toURI().toString());
+
+        // Crear un ImageView para mostrar la imagen
+        ImageView imageView = new ImageView(imagen);
+        imageView.setFitWidth(600); // Ajusta el ancho de la imagen según tus necesidades
+        imageView.setPreserveRatio(true);
+        // Crear un diálogo para mostrar la imagen
+        Dialog<Image> dialogo = new Dialog<>();
+        dialogo.getDialogPane().setContent(imageView);
+        dialogo.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialogo.setTitle("Imagen");
+        dialogo.setHeaderText("Esta es la imagen que seleccionaste:");
+        dialogo.showAndWait();
     }
 
-    // Obtener la ubicación de la imagen según el modelo del automóvil
-    String imagenPath = null;
-    if (auto.getModelo().equals("BMW M3")) {
-        imagenPath = "src/Imagenes/BMW M3.jpg";
-    } else if (auto.getModelo().equals("Lamborghini Gallardo")) {
-        imagenPath = "src/Imagenes/Lamborghini Gallardo.jpg";
-    } else if (auto.getModelo().equals("Mercedes-Benz SLR McLaren")) {
-        imagenPath = "src/Imagenes/Mercedes-Benz SLR McLaren.jpg";
-    } else if (auto.getModelo().equals("Porsche Carrera GT")) {
-        imagenPath = "src/Imagenes/Porsche Carrera GT.jpg";
-    } else if (auto.getModelo().equals("Ford GT")) {
-        imagenPath = "src/Imagenes/Ford GT.jpg";
-    } else if (auto.getModelo().equals("Chevrolet Corvette C6.R")) {
-        imagenPath = "src/Imagenes/Chevrolet Corvette C6.R.jpg";
-    } else if (auto.getModelo().equals("Audi R8")) {
-        imagenPath = "src/Imagenes/Audi R8.jpg";
-    } else if (auto.getModelo().equals("Mazda RX-8")) {
-        imagenPath = "src/Imagenes/Mazda RX-8.jpg";
-    } else if (auto.getModelo().equals("Dodge Charger")) {
-        imagenPath = "src/Imagenes/Dodge Charger.jpg";
-    } else if (auto.getModelo().equals("BMW M6")) {
-        imagenPath = "src/Imagenes/BMW M6.jpg";
-    } else if (auto.getModelo().equals("McLaren P1")) {
-        imagenPath = "src/Imagenes/McLaren P1.jpg";
-    } else if (auto.getModelo().equals("Bugatti Veyron")) {
-        imagenPath = "src/Imagenes/Bugatti Veyron.jpg";
+    @FXML
+    private void push(ActionEvent event) {
+        // Verificar si el campo de texto "txtmod" no está vacío
+        if (!"".equals(txtmod.getText().trim())) {
+            String matricula = txtmatri.getText().trim();
+            boolean duplicada = false;
+
+            // Comprobar si la matrícula ya existe en la lista
+            for (nodo temp : nodos) {
+                if (temp.getMatricula().equals(matricula)) {
+                    duplicada = true;
+                    break;
+                }
+            }
+
+            if (duplicada) {
+                // mostrar mensaje de matrícula duplicada
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Matrícula duplicada");
+                alert.setContentText("La matrícula ya existe en la lista.");
+
+                // Limpiar campos de texto
+                txtmod.setText("");
+                txtmar.setText("");
+                txtmatri.setText("");
+                txtpreci.setText("");
+                txtunid.setText("");
+
+                alert.showAndWait();
+            } else {
+                // crea un nuevo nodo para agregar a la pila
+                nodo newNode = new nodo(txtmod.getText().trim(), txtmar.getText().trim(), matricula, Float.parseFloat(txtpreci.getText().trim()), Integer.parseInt(txtunid.getText().trim()));
+
+                // establece el siguiente nodo del nuevo nodo como el anterior nodo en la pila
+                if (!nodos.isEmpty()) {
+                    newNode.sig = nodos.get(nodos.size() - 1);
+                }
+
+                // agrega el elemento a la pila y actualiza la tabla
+                nodos.add(newNode);
+                tablaauto.setItems(nodos);
+                tablaauto.refresh();
+
+                // Limpiar campos de texto
+                txtmod.setText("");
+                txtmar.setText("");
+                txtmatri.setText("");
+                txtpreci.setText("");
+                txtunid.setText("");
+            }
+        } else {
+            // mostrar mensaje de advertencia sobre campos vacíos
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setHeaderText("Mensaje de información");
+            alerta.setTitle("Diálogo de advertencia");
+            alerta.setContentText("Es necesario escribir todos los datos");
+
+            // Limpiar campos de texto
+            txtmod.setText("");
+            txtmar.setText("");
+            txtmatri.setText("");
+            txtpreci.setText("");
+            txtunid.setText("");
+
+            alerta.showAndWait();
+        }
     }
-
-    // Verificar si se encontró la ubicación de la imagen
-    if (imagenPath == null) {
-        // Mostrar mensaje de advertencia si no se encontró la ubicación de la imagen
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setHeaderText("No se encontró la imagen para el modelo seleccionado");
-        alerta.setContentText("No se pudo encontrar la imagen para el modelo: " + auto.getModelo());
-        alerta.showAndWait();
-        return;
-    }
-
-    // Cargar la imagen
-    Image imagen = new Image(new File(imagenPath).toURI().toString());
-
-    // Crear un ImageView para mostrar la imagen
-    ImageView imageView = new ImageView(imagen);
-    imageView.setFitWidth(800); // Ajusta el ancho de la imagen según tus necesidades
-    imageView.setPreserveRatio(true);
-    // Crear un diálogo para mostrar la imagen
-Dialog<Image> dialogo = new Dialog<>();
-dialogo.getDialogPane().setContent(imageView);
-dialogo.getDialogPane().getButtonTypes().add(ButtonType.OK);
-dialogo.setTitle("Imagen");
-dialogo.setHeaderText("Esta es la imagen que seleccionaste:");
-dialogo.showAndWait();
+    @FXML
+    public void pop() {
 }
+
+
 }
