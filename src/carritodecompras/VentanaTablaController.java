@@ -8,6 +8,8 @@ package carritodecompras;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -393,94 +395,88 @@ public class VentanaTablaController implements Initializable {
     }
 
     @FXML
-    public void compra(ActionEvent event) {
-        // Obtener el automóvil seleccionado en la tabla
-        nodo auto = tablaauto.getSelectionModel().getSelectedItem();
-        // Verificar que se ha seleccionado un automóvil
-        if (auto == null) {
-            // Mostrar mensaje de advertencia si no se ha seleccionado ningún automóvil
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setHeaderText("No se ha seleccionado ningún automóvil");
-            alerta.setContentText("Seleccione un automóvil de la tabla para comprar.");
-            alerta.showAndWait();
-            return;
+public void compra(ActionEvent event) {
+    // Obtener el automóvil seleccionado en la tabla
+    nodo auto = tablaauto.getSelectionModel().getSelectedItem();
+    // Verificar que se ha seleccionado un automóvil
+    if (auto == null) {
+        // Mostrar mensaje de advertencia si no se ha seleccionado ningún automóvil
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setHeaderText("No se ha seleccionado ningún automóvil");
+        alerta.setContentText("Seleccione un automóvil de la tabla para comprar.");
+        alerta.showAndWait();
+        return;
+    }
+
+    // Crear un diálogo para obtener la cantidad de unidades a comprar
+    TextInputDialog dialogo = new TextInputDialog("");
+    dialogo.setTitle("Cantidad a comprar");
+    dialogo.setHeaderText(null);
+    dialogo.setContentText("Ingrese la cantidad a comprar:");
+    Optional<String> cantidad = dialogo.showAndWait();
+
+    // Verificar que la entrada del usuario para la cantidad de unidades sea un número entero positivo
+    if (!cantidad.isPresent()) {
+        return; // El usuario ha cerrado el diálogo
+    } else if (!cantidad.get().matches("^[1-9]\\d*$")) {
+        // La entrada no es un número entero positivo
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setHeaderText("Entrada inválida");
+        alerta.setContentText("La cantidad de unidades debe ser un número entero positivo.");
+        alerta.showAndWait();
+        return;
+    }
+
+    int cantidadComprar = Integer.parseInt(cantidad.get());
+
+    // Verificar si hay suficientes unidades disponibles para la compra
+    if (cantidadComprar > auto.getUnidades()) {
+        // Mostrar mensaje de advertencia si la cantidad de unidades no está disponible
+        Alert ale = new Alert(Alert.AlertType.INFORMATION);
+        ale.setHeaderText("Información");
+        ale.setContentText("La cantidad de unidades no está disponible");
+        ale.showAndWait();
+        return;
+    }
+
+    if (auto.getUnidades() > 0) {
+        // Actualizar la cantidad de unidades y los enlaces en la lista
+        auto.setUnidades(auto.getUnidades() - cantidadComprar);
+
+        // Actualizar la tabla de autos
+        tablaauto.refresh();
+
+        // Mostrar información de la compra y confirmar el pago
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setHeaderText("¿Deseas comprar el auto " + auto.getModelo() + "?");
+        alerta.setContentText("El precio del auto es: " + auto.getPrecio() + "\nEl total a pagar es: " + (auto.getPrecio() * cantidadComprar));
+        Optional<ButtonType> result = alerta.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Pago realizado correctamente
+            Alert notify = new Alert(Alert.AlertType.INFORMATION);
+            notify.setTitle("¡Proceso Exitoso!");
+            notify.setHeaderText("Cargando información...");
+            notify.setContentText("Pago Realizado Correctamente!");
+            notify.show();
         }
 
-        // Crear un diálogo para obtener la cantidad de unidades a comprar
-        TextInputDialog dialogo = new TextInputDialog("");
-        dialogo.setTitle("Cantidad a comprar");
-        dialogo.setHeaderText(null);
-        dialogo.setContentText("Ingrese la cantidad a comprar:");
-        Optional<String> cantidad = dialogo.showAndWait();
-
-        // Verificar que la entrada del usuario para la cantidad de unidades sea un número entero positivo
-        if (!cantidad.isPresent()) {
-            return; // El usuario ha cerrado el diálogo
-        } else if (!cantidad.get().matches("^[1-9]\\d*$")) {
-            // La entrada no es un número entero positivo
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setHeaderText("Entrada inválida");
-            alerta.setContentText("La cantidad de unidades debe ser un número entero positivo.");
-            alerta.showAndWait();
-            return;
-        }
-
-        int cantidadComprar = Integer.parseInt(cantidad.get());
-
-        // Verificar si hay suficientes unidades disponibles para la compra
-        if (cantidadComprar > auto.getUnidades()) {
-            // Mostrar mensaje de advertencia si la cantidad de unidades no está disponible
-            Alert ale = new Alert(Alert.AlertType.INFORMATION);
-            ale.setHeaderText("Información");
-            ale.setContentText("La cantidad de unidades no está disponible");
-            ale.showAndWait();
-            return;
-        }
-
-        if (auto.getUnidades() > 0) {
-            // Actualizar la cantidad de unidades y los enlaces en la lista
-            auto.setUnidades(auto.getUnidades() - cantidadComprar);
-            nodo siguiente = auto.getSig();
-            nodo anterior = auto.getAnt();
-            siguiente.setAnt(anterior);
-            anterior.setSig(siguiente);
+        if (auto.getUnidades() <= 0) {
+            // Si no quedan unidades disponibles, eliminar el automóvil de la lista
+            nodos.remove(auto);
 
             // Actualizar la tabla de autos
             tablaauto.setItems(null);
             tablaauto.layout();
             tablaauto.setItems(FXCollections.observableList(nodos));
-
-            // Mostrar información de la compra y confirmar el pago
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setHeaderText("¿Deseas comprar el auto " + auto.getModelo() + "?");
-            alerta.setContentText("El precio del auto es: " + auto.getPrecio() + "\nEl total a pagar es: " + (auto.getPrecio() * cantidadComprar));
-            Alert notify = new Alert(Alert.AlertType.INFORMATION);
-            notify.setTitle("¡Proceso Exitoso!");
-            notify.setHeaderText("Cargando información...");
-            notify.setContentText("Pago Realizado Correctamente!");
-            alerta.showAndWait();
-            notify.show();
-
-            if (auto.getUnidades() <= 0) {
-                // Si no quedan unidades disponibles, eliminar el automóvil de la lista
-                auto.setUnidades(auto.getUnidades() - cantidadComprar);
-                siguiente.setAnt(anterior);
-                anterior.setSig(siguiente);
-                nodos.remove(auto);
-
-                // Actualizar la tabla de autos
-                tablaauto.setItems(null);
-                tablaauto.layout();
-                tablaauto.setItems(FXCollections.observableList(nodos));
-                // Mostrar mensaje de información si no quedan unidades disponibles
-                Alert ale = new Alert(Alert.AlertType.INFORMATION);
-                ale.setHeaderText("Información");
-                ale.setContentText("Ya no quedan unidades disponibles");
-                ale.showAndWait();
-                return;
-            }
+            // Mostrar mensaje de información si no quedan unidades disponibles
+            Alert ale = new Alert(Alert.AlertType.INFORMATION);
+            ale.setHeaderText("Información");
+            ale.setContentText("Ya no quedan unidades disponibles");
+            ale.showAndWait();
         }
     }
+}
+
 
     private nodo buscarNodoAnterior(nodo nodoActual) {
         nodo actual = cab;
@@ -579,7 +575,7 @@ public class VentanaTablaController implements Initializable {
                         // Actualizar la tabla de automóviles
                         tablaauto.setItems(null);
                         tablaauto.layout();
-                        tablaauto.setItems(FXCollections.observableList(nodos));
+                        tablaauto.setItems(FXCollections.observableList(getList(nodos)));
                     }
                     return; // Salir del método si se encuentra la matrícula
                 }
@@ -590,7 +586,19 @@ public class VentanaTablaController implements Initializable {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setHeaderText("Matrícula no encontrada");
             alerta.setContentText("No se encontró ningún automóvil con la matrícula ingresada.");
+            alerta.showAndWait();
         }
+    }
+
+// Obtener la lista de nodos en orden
+    private List<nodo> getList(List<nodo> nodos) {
+        List<nodo> lista = new LinkedList<>();
+        nodo actual = nodos.get(0);
+        do {
+            lista.add(actual);
+            actual = actual.getSig();
+        } while (actual != nodos.get(0));
+        return lista;
     }
 
     @FXML
